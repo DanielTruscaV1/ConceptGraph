@@ -93,7 +93,8 @@ const lines = svg.selectAll("line")
         function handleMouseDown(event, d) {
             if (!isDragging) {
                 console.log("Clicked on node " + d.id);
-                // Add your custom action here for click
+                // Add your custom action here for 
+                selectedId = d.id;
             }
         }
 
@@ -117,14 +118,57 @@ const lines = svg.selectAll("line")
             isDragging = false;
         }
 
+let selectedId = 0;
+
+import {overviews} from "./MockDB.js";
+
 </script>
 
 <template>
   <div id="app">
-
+    <div id="overview">
+        <h1>
+            Concept: {{ overviews[selectedId].concept }}
+        </h1>
+        <h2>
+            Filozof: {{ overviews[selectedId].filozof }}
+        </h2>
+        <img :src="overviews[selectedId].image"/>
+        <p>
+            {{ overviews[selectedId].abstract }}
+        </p>
+    </div>
   </div>
 </template>
 
 <style scoped>
-    
+    #overview 
+    {
+        position:fixed;
+        top:10vh;
+        right:30px;
+        width:30vw;
+        height:80vh;
+        background-color:rgba(230, 230, 230, 0.5);
+        border-radius:50px;
+        font-family: 'Montserrat', sans-serif;
+    }
+    h1, h2, p 
+    {
+        margin-left:30px;
+    }
+    h1 
+    {
+        font-size:25px;
+    }
+    h2 
+    {
+        font-size:23px;
+    }
+    p 
+    {
+        width:400px;
+        text-align:justify;
+        text-indent:50px;
+    }
 </style>
