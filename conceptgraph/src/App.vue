@@ -171,4 +171,10 @@ import {overviews} from "./MockDB.js";
         text-align:justify;
         text-indent:50px;
     }
+    img 
+    {
+        margin-left:25%;
+        width:50%;
+        height:200px;
+    }
 </style>
