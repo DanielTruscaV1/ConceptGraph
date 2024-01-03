@@ -1,4 +1,8 @@
 <script setup>
+import {ref} from "vue";
+
+let selectedId = ref(0);
+
 let isDragging = false;
 
 const data = [
@@ -94,7 +98,8 @@ const lines = svg.selectAll("line")
             if (!isDragging) {
                 console.log("Clicked on node " + d.id);
                 // Add your custom action here for 
-                selectedId = d.id;
+                selectedId.value = d.id;
+                console.log(selectedId.value);
             }
         }
 
@@ -118,24 +123,19 @@ const lines = svg.selectAll("line")
             isDragging = false;
         }
 
-let selectedId = 0;
-
 import {overviews} from "./MockDB.js";
 
 </script>
 
 <template>
   <div id="app">
-    <div id="overview">
+    <div v-if="selectedId != 0" id="overview">
         <h1>
-            Concept: {{ overviews[selectedId].concept }}
+            Concept: {{ overviews[selectedId-1].concept }}
         </h1>
-        <h2>
-            Filozof: {{ overviews[selectedId].filozof }}
-        </h2>
-        <img :src="overviews[selectedId].image"/>
+        <img :src="overviews[selectedId-1].image"/>
         <p>
-            {{ overviews[selectedId].abstract }}
+            {{ overviews[selectedId-1].abstract }}
         </p>
     </div>
   </div>
@@ -160,6 +160,7 @@ import {overviews} from "./MockDB.js";
     h1 
     {
         font-size:25px;
+        text-align:center;
     }
     h2 
     {
@@ -173,8 +174,8 @@ import {overviews} from "./MockDB.js";
     }
     img 
     {
-        margin-left:25%;
-        width:50%;
-        height:200px;
+        margin-left:10%;
+        width:80%;
+        height:250px;
     }
 </style>
